@@ -22,6 +22,11 @@ public class NumericalMethod
         return Math.pow(Math.cos(variable) + 2, 0.33333);
     }
 
+    private double getFunction3(double variable)
+    {
+        return Math.sin(variable) + (3 * Math.pow(variable, 2) / 2);
+    }
+
     public double dichotomyMethod()
     {
         double a = this.a;
@@ -64,6 +69,26 @@ public class NumericalMethod
     {
         double a = this.a;
         double b = this.b;
+        double c = a + getFunction1(a) / getFunction3(a);
+        int counter = 0;
+
+        while (Math.abs(c - a) > this.e)
+        {
+            counter++;
+            c = a + getFunction1(a) / getFunction3(a);
+            System.out.println("getFunction1(b)#" + counter + " = " + getFunction1(b));
+            System.out.println("getFunction3(a)#" + counter + " = " + getFunction3(a));
+            System.out.println("c" + counter + " = " + c);
+            b = c;
+        }
+
+        return c;
+    }
+
+    public double chrodMethod()
+    {
+        double a = this.a;
+        double b = this.b;
         double c = b - ((b - a) / (getFunction1(b) - getFunction1(a))) * getFunction1(b);
 
         while (Math.abs(c - a) > this.e)
@@ -74,9 +99,4 @@ public class NumericalMethod
 
         return c;
     }
-
-//    public double chrodMethod()
-//    {
-//
-//    }
 }
