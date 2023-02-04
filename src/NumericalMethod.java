@@ -24,7 +24,7 @@ public class NumericalMethod
 
     private double getFunction3(double variable)
     {
-        return Math.sin(variable) + (3 * Math.pow(variable, 2) / 2);
+        return Math.sin(variable) + (3 * Math.pow(variable, 2));
     }
 
     public double dichotomyMethod()
