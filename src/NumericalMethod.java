@@ -15,6 +15,7 @@ public class NumericalMethod
     private double getFunction1(double variable)
     {
         return Math.cos(variable) - Math.pow(variable, 3) + 2;
+//        return 3 * Math.sin(variable) - Math.pow(variable, 2) + 4;
     }
 
     private double getFunction2(double variable)
@@ -25,6 +26,7 @@ public class NumericalMethod
     private double getFunction3(double variable)
     {
         return Math.sin(variable) + (3 * Math.pow(variable, 2));
+//        return 3 * Math.cos(variable) - 2 * variable;
     }
 
     public double dichotomyMethod()
@@ -67,19 +69,14 @@ public class NumericalMethod
 
     public double newtonMethod()
     {
-        double a = this.a;
         double b = this.b;
+        double a = (this.a + b) / 2;
         double c = a + getFunction1(a) / getFunction3(a);
-        int counter = 0;
 
         while (Math.abs(c - a) > this.e)
         {
-            counter++;
+            a = c;
             c = a + getFunction1(a) / getFunction3(a);
-            System.out.println("getFunction1(b)#" + counter + " = " + getFunction1(b));
-            System.out.println("getFunction3(a)#" + counter + " = " + getFunction3(a));
-            System.out.println("c" + counter + " = " + c);
-            b = c;
         }
 
         return c;
