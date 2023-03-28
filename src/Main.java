@@ -1,16 +1,21 @@
 public class Main {
     public static void main(String[] args) {
-        double[] x = {0.119, 0.121, 0.123, 0.125, 0.127};
-        double[] y = {1.30918, 1.32434, 1.33968, 1.35519, 1.37068};
+        double[][] matrixB = {
+                {0.17, 0.26, -0.11, -0.16},
+                {0.13, -0.12, 0.09, -0.06},
+                {0.12, 0.05, -0.03, 0.12},
+                {0.13, 0.18, 0.24, 0.45}};
 
+        double[] matrixC = {-1.41, 0.48, -2.38, 0.72};
+        double eps = 0.0001;
 
-        RectangleRule rectangleRule = new RectangleRule(x, y);
-        System.out.println("Left rectangle rule: " + rectangleRule.leftRectangleRule());
-        System.out.println("Right rectangle rule: " + rectangleRule.rightRectangleRule());
+        Zeidel zeidel = new Zeidel(matrixB, matrixC, eps);
+        zeidel.solution();
 
+        System.out.println();
 
-        TrapezeAndSimpsonRule trapezeAndSimpsonRule = new TrapezeAndSimpsonRule(x, y);
-        System.out.println("Trapeze rule: " + trapezeAndSimpsonRule.trapezeRule());
-        System.out.println("Simpson rule: " + trapezeAndSimpsonRule.simpsonRule());
+        SimpleIteration simpleIteration = new SimpleIteration(matrixB, matrixC, eps);
+        simpleIteration.solution();
     }
+
 }
