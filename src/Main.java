@@ -10,7 +10,7 @@ public class Main {
         double eps = 0.0001;
 
         Zeidel zeidel = new Zeidel(matrixB, matrixC, eps);
-        zeidel.solution();
+//        zeidel.solution();
 
         System.out.println();
 

@@ -12,7 +12,7 @@ public class SimpleIteration {
 
     public double norm() {
         for (int row = 0; row < matrixB.length; row++) {
-            int abssum = 0;
+            double abssum = 0;
             for (int col = 0; col < matrixB[row].length; col++) {
                 abssum += Math.abs(matrixB[row][col]);
             }
@@ -59,7 +59,7 @@ public class SimpleIteration {
         }
         System.out.println("SimpleIteration: ");
         for (int i = 0; i < 4; i++) {
-            System.out.println(x0[i]);
+            System.out.println("x" + (i + 1) + " = " + x0[i]);
         }
     }
 }
