@@ -1,40 +1,59 @@
-import numpy as np
 import matplotlib.pyplot as plt
-from math import log
+import numpy as np
+
 
 def f(x):
-    return (log(x))**(9/7)
+    return np.log(x) ** (9 / 5)
 
-x = [9, 12, 15]
-y = [f(x[0]), f(x[1]), f(x[2])]
 
-coefficients = np.polyfit(x, y, len(x) - 1)
-
-lagrange_poly = np.poly1d(coefficients)
-
+x = np.array([9, 12, 15])
 a = 11.5
-lagrange_value = lagrange_poly(a)
+
+
+def divided_differences(x, y):
+    n = len(x)
+    F = np.zeros((n, n))
+    F[:, 0] = y
+
+    for j in range(1, n):
+        for i in range(n - j):
+            F[i, j] = (F[i + 1, j - 1] - F[i, j - 1]) / (x[i + j] - x[i])
+
+    return F[0, :]
+
+
+y = f(x)
+coefficients = divided_differences(x, y)
+
+
+def newton_polynomial(x, coefficients, nodes):
+    n = len(nodes)
+    result = coefficients[0]
+
+    for i in range(1, n):
+        term = coefficients[i]
+        for j in range(i):
+            term *= (x - nodes[j])
+        result += term
+
+    return result
+
+
+p_a = newton_polynomial(a, coefficients, x)
 
 x_values = np.linspace(x[0], x[2], 100)
-f_values = [f(x) for x in x_values]
+y_values_f = f(x_values)
+y_values_p = newton_polynomial(x_values, coefficients, x)
 
-lagrange_values = lagrange_poly(x_values)
-
-plt.plot(x_values, lagrange_values, label='Полином Лагранжа')
-plt.plot(x_values, f_values, label='f(x)')
+plt.plot(x_values, y_values_f, label='f(x)')
+plt.plot(x_values, y_values_p, label='Полином Ньютона')
 plt.scatter(x, y, color='red', label='Узлы интерполяции')
-plt.scatter(a, lagrange_value, color='green', label='Значение полинома в точке a')
+plt.scatter(a, p_a, color='green', label='Значение полинома в точке a')
 plt.legend()
 plt.xlabel('x')
 plt.ylabel('y')
-plt.title('Интерполяция полиномом Лагранжа')
-plt.grid(True)
+plt.title('Интерполяция полиномом Ньютона')
 plt.show()
 
-exact_value = f(a)
-
-interpolation_error = abs(exact_value - lagrange_value)
-
-print("Значение функции f(x) в точке a:", exact_value)
-print("Значение полинома Лагранжа в точке a:", lagrange_value)
-print("Погрешность интерполяции:", interpolation_error)
+exact_error = f(a) - p_a
+print('Погрешность интерполяции:', exact_error)
