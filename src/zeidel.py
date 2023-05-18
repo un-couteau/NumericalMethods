@@ -5,7 +5,7 @@ from .simple_iteration import SimpleIteration
 
 class Zeidel(SimpleIteration):
     def __init__(self, matrix_a: list[list[float]], matrix_b: list[float], eps: float = 0.0001) -> None:
-        super().__init__(matrix_a, matrix_b, eps=0.0001)
+        super().__init__(matrix_a, matrix_b)
 
     def get_result(self):
         q: float = self._norm()
