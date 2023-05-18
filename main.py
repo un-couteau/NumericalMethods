@@ -9,7 +9,7 @@ def main() -> None:
 
     x_list, y_list = euler.get_result()
     for x, y in zip(x_list, y_list):
-        print(f"x= {round(x, 1)}\ty= {round(y, 1)}")
+        print(f"x= {round(x, 1)}\t\ty= {round(y, 1)}")
 
 
 if __name__ == '__main__':

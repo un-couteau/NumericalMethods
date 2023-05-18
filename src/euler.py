@@ -15,8 +15,8 @@ class Euler:
 
         self._h = h
 
-        self._y = 1
-        self._x = 0
+        self._y = 1.0
+        self._x = 0.0
         self._y_list: list[float | int] = []
         self._x_list: list[float | int] = []
 
