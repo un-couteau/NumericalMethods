@@ -1,27 +1,34 @@
-from numpy import array
-from simple_iteration import SimpleIteration
 from copy import copy
+from numpy import array
+from .simple_iteration import SimpleIteration
+
+
 class Zeidel(SimpleIteration):
-    def __init__(self, matrix_a: list[list[float]], matrix_b: list[float]) -> None:
-        super.__init__()
-        super().__init__(matrix_a, matrix_b)
+    def __init__(self, matrix_a: list[list[float]], matrix_b: list[float], eps: float = 0.0001) -> None:
+        super().__init__(matrix_a, matrix_b, eps=0.0001)
 
     def get_result(self):
         q: float = self._norm()
 
         m_x: list[float] = [0.0 for _ in range(self._matrix_size)]
 
-        iterations: int = 0
         x_0: list[float] = copy(self._matrix_b)
 
-        while True:
+        flag: bool = True
+        while flag:
             for i in range(self._matrix_size):
+                temp: float = 0
                 for j in range(self._matrix_size):
-                    x_0[i] = x_0[]
-                # for_append: float = 0
+                    temp += x_0[j] * self._matrix_a[i][j]
+                x_0[i] = temp + self._matrix_b[i]
 
-                # x_0[i] = x_0[0] * self._matrix_b[i][0] + x_0[]
-                # for j in range(self._matrix_a_len):
-                #     x_0[i] = x_0[i] * self._matrix_b[i]
-                # ...
+            delta_x = array(x_0) - array(m_x)
+            delta = self._max(delta_x)
 
+            if (delta * q / (1 - q)) < self._eps:
+                flag = False
+
+            m_x = copy(x_0)
+            self._iterations += 1
+
+            if not flag: return x_0
