@@ -7,7 +7,7 @@ class RungeKutty(Euler):
             self._y_list.append(self._y)
             self._x_list.append(self._x)
 
-            k1 = self._h * self.f()
+            k1 = self._h * self.f(self._x, self._y)
             k2 = self._h * self.f(self._x + 0.5 * self._h, self._y + 0.5 * k1)
             k3 = self._h * self.f(self._x + 0.5 * self._h, self._y + 0.5 * k2)
             k4 = self._h * self.f(self._x + self._h, self._y + k3)
