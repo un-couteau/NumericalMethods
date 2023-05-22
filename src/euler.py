@@ -20,7 +20,7 @@ class Euler:
         self._y_list: list[float | int] = []
         self._x_list: list[float | int] = []
 
-    def f(self, x: float, y: float) -> float:
+    def _f(self, x: float, y: float) -> float:
         return math.pow(-1, self._n + self._p + self._q) * float(f"{self._a}.{self._b}") * y + float(
             f"{self._c}.{self._d}") * math.pow(x, 2) + float(f"{self._l}.{self._m}")
 
