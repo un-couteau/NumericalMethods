@@ -29,7 +29,7 @@ class Euler:
             self._y_list.append(self._y)
             self._x_list.append(self._x)
 
-            value: float = self.f(self._x, self._y)
+            value: float = self._f(self._x, self._y)
 
             self._y += self._h * value
             self._x += self._h
